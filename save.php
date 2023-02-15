@@ -14,8 +14,28 @@ if (isset($_GET['id'])) {
     $id = null;
     $album = new Album;
 }
-var_dump($id);
-var_dump($album);
+
+///////////// VALIDATION /////////////
+
+$valid = true;
+$error_messages = [];
+
+if (trim($_POST['name']) == '') {
+    $valid = false;
+    $error_messages['name'][] = 'Name is mandatory';
+}
+
+if (trim($_POST['author']) == '') {
+    $valid = false;
+    $error_messages['author'][] = 'Author is mandatory';
+}
+
+if ($valid == false) {
+    $_SESSION['error_messages'] = $error_messages;
+    header('Location: edit.php?id=' .$id);
+    exit();
+}
+
 
 
  

@@ -31,7 +31,9 @@ $albums = select(null, null, 'Album');
 
     <?php foreach($albums as $album) : ?>
         <div class="album">
-            <?= $album->name ?> by <?= $album->author ?>  (<?= $album->year; ?>) - <?= $album->num_songs ?> songs
+            <?= $album->name ?> by <?= $album->author ?>  
+            <?php if($album->year):?>(<?= $album->year; ?>)<?php endif ?>
+            <?php if($album->num_songs) : ?> - <?= $album->num_songs ?> songs <?php endif; ?>
             <a class="edit" href="edit.php?id=<?=$album->id?>">Edit</a>
             
             <form action="delete.php?id=<?=$album->id?>" method="post" 

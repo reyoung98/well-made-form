@@ -4,3 +4,11 @@
     border-radius: 5px;
     background-color: #78C091;
 }
+
+.error_message {
+    width: 250px;
+    padding: .5rem;
+    margin: .5rem 0;
+    border-radius: 5px;
+    background-color: #E74369aa; 
+}

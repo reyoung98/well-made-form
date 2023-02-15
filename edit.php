@@ -11,8 +11,10 @@ require_once 'DBBlackbox.php';
 session_start();
 
 $success_message = $_SESSION['success_message'] ?? null;
+$error_messages = $_SESSION['error_messages'] ?? null;
 
 unset($_SESSION['success_message']);
+unset($_SESSION['error_messages']);
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -40,6 +42,17 @@ if (isset($_GET['id'])) {
     <div class="success_message">
         <?= $success_message ?>
     </div>
+<?php endif; ?>
+
+<?php if ($error_messages) : ?>
+
+    <?php foreach ($error_messages as $type) :?>
+        <?php foreach ($type as $error_message) : ?>
+            <div class="error_message">
+                <?= $error_message ?>
+            </div>
+        <?php endforeach; ?> 
+    <?php endforeach; ?> 
 <?php endif; ?>
 
 <form action="save.php<?= $id ? '?id='.$id : '' ?>" method="post">   
