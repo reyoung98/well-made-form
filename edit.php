@@ -1,7 +1,18 @@
+<style>
+    <?php include "messages.css"; ?>
+    <?php include "page.css"; ?>
+</style>
+
 <?php
 
 require_once 'Album.php';
 require_once 'DBBlackbox.php';
+
+session_start();
+
+$success_message = $_SESSION['success_message'] ?? null;
+
+unset($_SESSION['success_message']);
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -11,11 +22,25 @@ if (isset($_GET['id'])) {
     $album = new Album;
 }  
 
-var_dump($album);
-
 ?>
 
 <?php include 'menu.php'; ?>
+
+<main>
+
+<div class="form-container">
+
+<?php if ($id) : ?>
+    <h1>Edit album</h1>
+<?php else : ?>
+    <h1>Create a new album</h1>
+<?php endif; ?>
+
+<?php if ($success_message) : ?>
+    <div class="success_message">
+        <?= $success_message ?>
+    </div>
+<?php endif; ?>
 
 <form action="save.php<?= $id ? '?id='.$id : '' ?>" method="post">   
   
@@ -39,4 +64,7 @@ var_dump($album);
  
 </form>
 
+</div>
+
+</main>
 

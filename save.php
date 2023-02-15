@@ -3,8 +3,8 @@
 require_once 'DBBlackbox.php';
 require_once 'Album.php';
 
-// // start the session
-// session_start();
+// start the session
+session_start();
 
 
 if (isset($_GET['id'])) {
@@ -30,12 +30,13 @@ $album->year = $_POST['year'] ?? $album->year;
 // here done using DBBlackbox
 if ($id) {
     update($id, $album);
+    $_SESSION['success_message'] = 'Album successfully updated!';
+    
 } else {
     $id = insert($album);
+    $_SESSION['success_message'] = 'Album successfully saved!';
 }
 
-
-// $_SESSION['success_message'] = 'Song successfully saved!';
 
 // redirect to edit page
 header('Location: edit.php?id=' . $id);
